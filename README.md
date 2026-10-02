@@ -14,6 +14,17 @@
 8. Nhấn biểu tượng tam giác cạnh `main()` → **Run App.main()**.
 9. Kiểm tra kết quả chương trình trên console.
 Nếu không thấy nút Run: kiểm tra SDK và bảo đảm `src/main/java` là Sources Root; tải lại Maven project.
+## Mở và chạy trong Visual Studio
+1. Giải nén project ra một thư mục trên máy.
+2. Mở **Visual Studio** và chọn **Open a project or solution**.
+3. Chọn file `.sln` của project để mở.
+4. Đảm bảo project đã cài **.NET** phù hợp và các thành phần C# cần thiết trong Visual Studio Installer.
+5. Cấu hình thông tin kết nối **SQL Server Express** theo file cấu hình của project.
+6. Đảm bảo cơ sở dữ liệu đã được tạo và các bảng đã được khởi tạo.
+7. Mở file `Program.cs`.
+8. Nhấn **Start** hoặc phím **F5** để chạy chương trình.
+9. Kiểm tra kết quả chương trình trên console.
+Nếu không chạy được: kiểm tra **.NET SDK**, cấu hình project và kết nối SQL Server.
 ## Cấu trúc Java
 - 'App.java' : chương trình chính, demo
 - 'Mon.java' : là cha của các 'TraSua.java(maMon)' , 'Soda.java(maMon))' , ... :chứa thông tin từng nhóm, món
@@ -22,6 +33,14 @@ Nếu không thấy nút Run: kiểm tra SDK và bảo đảm `src/main/java` l�
 - 'BenThuBa.java(maBenThuBa)':chứa thông tin bên thứ 3
 - 'PhieuNhap.java(maPhieuNhap)':chứa thông tin nhập hàng
 - 'NhanVien.java(maNhanVien)': chứa thông tin nhân viên
+## Cấu trúc C#
+- `Program.cs`: chương trình chính và phần demo.
+- `Mon.cs`: lớp cơ sở chứa thông tin chung của các món; kế thừa bởi `TraSua.cs`, `Soda.cs`, ...
+- `NguyenLieu.cs`: lớp cơ sở chứa thông tin chung của các nguyên liệu; kế thừa bởi `Duong.cs`, `Muoi.cs`, `Tra.cs`, ...
+- `DonHang.cs`: quản lý thông tin đơn hàng.
+- `BenThuBa.cs`: quản lý thông tin bên thứ ba.
+- `PhieuNhap.cs`: quản lý thông tin nhập hàng.
+- `NhanVien.cs`: quản lý thông tin nhân viên.
 ## Quy tắc
 - Mỗi sản phẩm thuộc một danh mục và sử dụng nguyên liệu theo công thức.
 - Khi bán hàng, nguyên liệu được trừ theo định mức của sản phẩm.
