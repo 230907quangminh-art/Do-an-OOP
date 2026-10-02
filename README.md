@@ -2,7 +2,6 @@
 
 ###### Project Java 17, Maven, chạy console trên IntelliJ IDEA. Sử dụng cơ sở dữ liệu MySQL 8.x Community để lưu trữ và quản lý dữ liệu của quán Coffee.
 ###### Project C#, chạy console trên Visual Studio. Sử dụng cơ sở dữ liệu SQL Server Express để lưu trữ và quản lý dữ liệu của quán Coffee.
-##### Phát biểu vấn đề 
 ## Phát biểu vấn đề
 - Hệ thống quản lý quán Coffee được xây dựng nhằm quản lý sản phẩm, nguyên liệu, công thức pha chế, đơn hàng, nhân viên, thanh toán, bên thứ ba và nhập nguyên liệu. Hệ thống hỗ trợ lưu trữ, xử lý và thống kê dữ liệu phục vụ hoạt động của quán.
 ## Mở và chạy trong IntelliJ
