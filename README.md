@@ -207,6 +207,7 @@ Các thuộc tính chính:
 - Một **Sản phẩm** có thể sử dụng nhiều **Nguyên liệu**.
 - Một **Nguyên liệu** có thể được sử dụng cho nhiều **Sản phẩm**.
 - Một **Sản phẩm** có một **Công thức**.
+- Một **Đơn hàng** có thể chứa nhiều **Sản phẩm**.
 - Một **Sản phẩm** có thể xuất hiện trong nhiều **Đơn hàng**.
 - Một **Nhân viên** có thể thực hiện nhiều **Đơn hàng**.
 - Một **Đơn hàng** được thực hiện bởi một **Nhân viên**.
