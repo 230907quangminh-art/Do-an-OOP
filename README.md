@@ -82,10 +82,10 @@ Lưu thông tin các món được phục vụ tại quán.
 Các thuộc tính chính:
 
 - Mã sản phẩm - thuộc tính khóa
-- Tên sản phẩm - thuộc tính khóa mô tả 
-- Nguyên liệu - thuộc tính khóa mô tả 
-- Size - thuộc tính khóa mô tả 
-- Giá bán - thuộc tính khóa mô tả 
+- Tên sản phẩm - thuộc tính mô tả 
+- Nguyên liệu - thuộc tính mô tả 
+- Size - thuộc tính mô tả 
+- Giá bán - thuộc tính mô tả 
 - mã Danh mục - khóa ngoại
 
 ### Danh mục
