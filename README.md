@@ -277,6 +277,20 @@ Ngày demo cố định: 23/09/2026.
 - Là class cha của các nguyên liệu:
   - `Duong.java (IDNguyenLieu)`
   - `Muoi.java (IDNguyenLieu)`
+  - `Tra.java (IDNguyenLieu)`
+- Chứa thông tin về nguyên liệu.
+
+### DonHang.java
+- Chứa thông tin đơn hàng (`IDDonHang`).
+
+### BenThuBa.java
+- Chứa thông tin bên thứ 3 (`IDBenThuBa`).
+
+### PhieuNhap.java
+- Chứa thông tin phiếu nhập hàng (`IDPhieuNhap`).
+
+### NhanVien.java
+- Chứa thông tin nhân viên (`IDNhanVien`).
 
 ## Sơ đồ
 <img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/c1b3b2c2-e3fc-411a-98c6-69331e7a085d" />
