@@ -214,6 +214,8 @@ Các thuộc tính chính:
 - Một **Đơn hàng** sử dụng một **Phương thức thanh toán**.
 - Một **Đơn hàng** có thể được đặt trực tiếp hoặc thông qua **Bên thứ ba**.
 - Một **Bên thứ ba** có thể nhận nhiều **Đơn hàng**.
+- Một **Đơn hàng** có thể sử dụng nhiều **Ly nhựa**.
+- Một **Ly nhựa** có thể được sử dụng cho nhiều **Đơn hàng**.
 - Một **Nguyên liệu** có thể xuất hiện trong nhiều lần nhập.
 - Một **Phiếu nhập** có thể chứa nhiều loại nguyên liệu.
 ## Câu truy vấn
