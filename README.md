@@ -261,4 +261,6 @@ Ngày demo cố định: 23/09/2026.
 28. Tìm nguyên liệu có mức tiêu hao trung bình cao nhất.
 29. Tìm khung giờ có số lượng sản phẩm bán ra cao nhất.
 30. Lọc và hiển thị các đơn hàng đã bị hủy trong ngày 23/09/2026.
+## Sơ đồ
+<img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/c1b3b2c2-e3fc-411a-98c6-69331e7a085d" />
 
