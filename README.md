@@ -81,16 +81,18 @@ Lưu thông tin các món được phục vụ tại quán.
 
 Các thuộc tính chính:
 
-- Mã sản phẩm
-- Tên sản phẩm
-- Nguyên liệu
-- Size
-- Giá bán
-- Danh mục
+- Mã sản phẩm - thuộc tính khóa
+- Tên sản phẩm - thuộc tính khóa mô tả 
+- Nguyên liệu - thuộc tính khóa mô tả 
+- Size - thuộc tính khóa mô tả 
+- Giá bán - thuộc tính khóa mô tả 
+- mã Danh mục - khóa ngoại
 
 ### Danh mục
 
 Phân loại các sản phẩm trong quán.
+- Mã danh mục — thuộc tính khóa
+- Tên danh mục — thuộc tính mô tả
 
 Ví dụ:
 
@@ -106,12 +108,12 @@ Lưu thông tin các nguyên liệu được sử dụng để tạo ra sản ph
 
 Các thuộc tính chính:
 
-- Mã nguyên liệu
-- Tên nguyên liệu
-- Đơn vị tính
-- Số lượng tồn
-- Giá nhập
-- Mức tồn tối thiểu
+- Mã nguyên liệu - thuộc tính khóa 
+- Tên nguyên liệu — thuộc tính mô tả
+- Đơn vị tính  — thuộc tính mô tả
+- Số lượng tồn  — thuộc tính mô tả
+- Giá nhập  — thuộc tính mô tả
+- Mức tồn tối thiểu  — thuộc tính mô tả
 
 ### Công thức
 
@@ -119,9 +121,9 @@ Xác định các nguyên liệu cần thiết và số lượng sử dụng đ�
 
 Các thuộc tính chính:
 
-- Mã sản phẩm
-- Mã nguyên liệu
-- Số lượng sử dụng
+- Mã sản phẩm - khóa ngoại
+- Mã nguyên liệu - khóa ngoại
+- Số lượng sử dụng  — thuộc tính mô tả
 
 ### Đơn hàng
 
@@ -129,80 +131,78 @@ Lưu thông tin mỗi lần khách hàng gọi món.
 
 Các thuộc tính chính:
 
-- Mã đơn hàng
-- Thời gian lập đơn
-- Nhân viên thực hiện
-- Mã sản phẩm
-- Số lượng
-- Ly nhựa
-- Đơn giá
-- Tổng tiền 
-- Chiết khấu
-- Thành tiền (nếu có chiết khấu)
-- Phương thức thanh toán
-- Phương thức mua ( trực tiếp / bên thứ 3 )
-- Trạng thái đơn hàng (đã hoàn thành/ đang trong quá trình làm / đã hủy)
+- Mã đơn hàng - thuộc tính khóa
+- Thời gian lập đơn  — thuộc tính mô tả
+- Mã nhân viên  — khóa ngoại
+- Mã sản phẩm - khóa ngoại 
+- Số lượng  — thuộc tính mô tả
+- Ly nhựa  — thuộc tính mô tả
+- Đơn giá  — thuộc tính mô tả
+- Tổng tiền  — thuộc tính mô tả
+- Chiết khấu  — thuộc tính mô tả
+- Thành tiền (nếu có chiết khấu)  — thuộc tính mô tả
+- Mã phương thức thanh toán — khóa ngoại
+- Phương thức mua (trực tiếp / bên thứ 3 ) — thuộc tính mô tả
+- Trạng thái đơn hàng (đã hoàn thành/ đang trong quá trình làm / đã hủy)  — thuộc tính mô tả
 ### Nhân viên
 
 Lưu thông tin nhân viên của quán.
 
 Các thuộc tính chính:
 
-- Mã nhân viên
-- Họ tên
-- Số điện thoại
-- Địa chỉ
-- Chức vụ
+- Mã nhân viên - thuộc tính khóa
+- Họ tên  — thuộc tính mô tả
+- Số điện thoại  — thuộc tính mô tả
+- Địa chỉ  — thuộc tính mô tả
+- Chức vụ  — thuộc tính mô tả
 
 ### Phương thức thanh toán
 
-Quản lý phương thức thanh toán của đơn hàng.
+Các thuộc tính:
 
-Các phương thức sử dụng:
-
-- Tiền mặt
-- Chuyển khoản
+- Mã phương thức thanh toán — thuộc tính khóa
+- Tên phương thức — thuộc tính mô tả
 
 ### Bên thứ ba
 
-Quản lý các nền tảng bên thứ ba được sử dụng để đặt đơn.
+Các thuộc tính:
 
-Ví dụ:
-
-- GrabFood
-- ShopeeFood
-- Các nền tảng đặt hàng khác
-
-Các thuộc tính chính:
-
-- Mã bên thứ ba
-- Tên bên thứ ba
-- Mức chiết khấu
+- Mã bên thứ ba — thuộc tính khóa
+- Tên bên thứ ba — thuộc tính mô tả
+- Mức chiết khấu — thuộc tính mô tả
 
 ### Ly nhựa
 
-Theo dõi số lượng ly nhựa được sử dụng trong quá trình bán hàng.
+Các thuộc tính:
 
-Các thuộc tính chính:
-
-- Loại ly
-- Số lượng
-- Đơn giá
+- Mã ly nhựa— thuộc tính khóa
+- Loại ly — thuộc tính mô tả
+- Số lượng — thuộc tính mô tả
+- Đơn giá — thuộc tính mô tả
 
 ### Nhập nguyên liệu
 
-Lưu thông tin các lần nhập nguyên liệu từ bên thứ ba.
+Các thuộc tính:
 
-Các thuộc tính chính:
+- Mã phiếu nhập — thuộc tính khóa
+- Mã bên thứ ba — khóa ngoại
+- Mã nguyên liệu — khóa ngoại
+- Ngày nhập — thuộc tính mô tả
+- Số lượng — thuộc tính mô tả
+- Đơn giá nhập — thuộc tính mô tả
+- Thành tiền — thuộc tính mô tả
+### Dữ liệu mẫu
 
-- Mã phiếu nhập
-- Mã bên thứ ba
-- Mã nguyên liệu
-- Ngày nhập
-- Số lượng
-- Đơn giá nhập
-- Thành tiền
+- Sản phẩm: Cà phê sữa, Bạc xỉu, Trà đào, Soda,...
+- Nguyên liệu: Cà phê, Sữa, Đường, Trà,...
+- Nhân viên: NV01, NV02,...
+- Bên thứ ba: GrabFood, ShopeeFood,...
 
+### Enum
+
+- `TrangThaiDonHang`: Đang làm, Hoàn thành, Đã hủy.
+- `PhuongThucThanhToan`: Tiền mặt, Chuyển khoản.
+- `PhuongThucMua`: Trực tiếp, Bên thứ ba.
 ## Mối quan hệ
 
 - Một **Danh mục** có nhiều **Sản phẩm**.
@@ -216,8 +216,6 @@ Các thuộc tính chính:
 - Một **Đơn hàng** sử dụng một **Phương thức thanh toán**.
 - Một **Đơn hàng** có thể được đặt trực tiếp hoặc thông qua **Bên thứ ba**.
 - Một **Bên thứ ba** có thể nhận nhiều **Đơn hàng**.
-- Một **Đơn hàng** có thể sử dụng nhiều **Ly nhựa**.
-- Một **Ly nhựa** có thể được sử dụng cho nhiều **Đơn hàng**.
 - Một **Nguyên liệu** có thể xuất hiện trong nhiều lần nhập.
 - Một **Phiếu nhập** có thể chứa nhiều loại nguyên liệu.
 ## Câu truy vấn
