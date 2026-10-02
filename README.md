@@ -15,12 +15,12 @@
 Nếu không thấy nút Run: kiểm tra SDK và bảo đảm `src/main/java` là Sources Root; tải lại Maven project.
 ## Cấu trúc 
 - 'App.java' : chương trình chính, demo
-- 'Mon.java' : là cha của các 'TraSua.java(IDMon)' , 'Soda.java(IDMon))' , ... :chứa thông tin từng nhóm, món
-- 'NguyenLieu.java(IDNguyenLieu' : là cha của các 'Duong.java' , 'Muoi.java' , 'Tra.java':thông tin nguyên liệu
-- 'DonHang.java(IDDonHang)':chứa thông tin đơn hàng
-- 'BenThuBa.java(IDBenThuBa)':chứa thông tin bên thứ 3
-- 'PhieuNhap.java(IDPhieuNhap)':chứa thông tin nhập hàng
-- 'NhanVien.java(IDNhanVien)': chứa thông tin nhân viên
+- 'Mon.java' : là cha của các 'TraSua.java(maMon)' , 'Soda.java(maMon))' , ... :chứa thông tin từng nhóm, món
+- 'NguyenLieu.java(maNguyenLieu' : là cha của các 'Duong.java' , 'Muoi.java' , 'Tra.java':thông tin nguyên liệu
+- 'DonHang.java(maDonHang)':chứa thông tin đơn hàng
+- 'BenThuBa.java(maBenThuBa)':chứa thông tin bên thứ 3
+- 'PhieuNhap.java(maPhieuNhap)':chứa thông tin nhập hàng
+- 'NhanVien.java(maNhanVien)': chứa thông tin nhân viên
 ## Quy tắc
 - Mỗi sản phẩm thuộc một danh mục và sử dụng nguyên liệu theo công thức.
 - Khi bán hàng, nguyên liệu được trừ theo định mức của sản phẩm.
