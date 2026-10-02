@@ -288,6 +288,7 @@ Ngày demo cố định: 23/09/2026.
 29. Tìm khung giờ có số lượng sản phẩm bán ra cao nhất.
 30. Lọc và hiển thị các đơn hàng đã bị hủy trong ngày 23/09/2026.
 ## Sơ đồ
-<img width="987" height="432" alt="image" src="https://github.com/user-attachments/assets/7d0af23b-1f70-4e55-bc41-1badef3dbbef" />
+<img width="2024" height="1096" alt="image" src="https://github.com/user-attachments/assets/436cb521-0850-4479-8e9c-d2bf984929af" />
+
 
 
