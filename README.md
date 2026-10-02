@@ -261,32 +261,23 @@ Ngày demo cố định: 23/09/2026.
 28. Tìm nguyên liệu có mức tiêu hao trung bình cao nhất.
 29. Tìm khung giờ có số lượng sản phẩm bán ra cao nhất.
 30. Lọc và hiển thị các đơn hàng đã bị hủy trong ngày 23/09/2026.
-# Cấu trúc chính
+## Cấu trúc chính
 
-## App.java
+### App.java
 - Chương trình chính, dùng để demo.
 
-## Mon.java
+### Mon.java
 - Là class cha của các món:
   - `TraSua.java (IDMon)`
   - `Soda.java (IDMon)`
   - ...
 - Chứa thông tin từng nhóm món và món cụ thể.
 
-## NguyenLieu.java
+### NguyenLieu.java
 - Là class cha của các nguyên liệu:
   - `Duong.java (IDNguyenLieu)`
   - `Muoi.java (IDNguyenLieu)`
-  - `Tra.java (IDNguyenLieu)`
-- Chứa thông tin về nguyên liệu.
 
-## DonHang.java
-- Chứa thông tin đơn hàng (`IDDonHang`).
-
-## BenThuBa.java
-- Chứa thông tin bên thứ 3 (`IDBenThuBa`).
-
-## PhieuNhap
 ## Sơ đồ
 <img width="1280" height="676" alt="image" src="https://github.com/user-attachments/assets/c1b3b2c2-e3fc-411a-98c6-69331e7a085d" />
 
