@@ -55,7 +55,10 @@ Nếu không chạy được: kiểm tra **.NET SDK**, cấu hình project và k
 - Chi phí nguyên liệu được dùng để tính giá vốn và lợi nhuận sản phẩm.
 - Ly nhựa được ghi nhận theo số lượng sử dụng trong các đơn hàng.
 ## Thành phần
-Hệ thống sử dụng MySQL 8.x để lưu trữ dữ liệu quản lý quán Coffee.
+Hệ thống sử dụng để lưu trữ dữ liệu quản lý quán Coffee.
+- Phiên bản Java sử dụng MySQL 8.x Community.
+- Phiên bản C# sử dụng SQL Server Express.
+
 
 Cơ sở dữ liệu quản lý các thông tin chính:
 
