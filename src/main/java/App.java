@@ -1,40 +1,18 @@
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import java.sql.*;
+public class App {
 
-public class App /*extends Application*/ {
-    /*@Override
-    public void start(Stage stage) {
-        Label label = new Label("Xin chào JavaFX!");
-        Button button = new Button("Bấm tôi");
+    public static void main(String[] args) throws Exception {
+        DatabaseLoader dl = DatabaseLoader.nap();
 
-        button.setOnAction(e -> label.setText("Bạn vừa bấm nút!"));
+        System.out.println("So san pham : " + dl.getDsSanPham().size());   // 20
+        System.out.println("So don hang : " + dl.getDsDonHang().size());   // 636
 
-        VBox root = new VBox(10, label, button);
-        Scene scene = new Scene(root, 300, 200);
+        long tong = dl.getDsDonHang().stream()
+                .filter(d -> d.getTrangThai() == TrangThaiDon.HOAN_THANH)
+                .mapToLong(DonHang::tinhTongTien)
+                .sum();
+        System.out.println("Tong tien don hoan thanh: " + tong);           // 57937000
 
-        stage.setTitle("Demo JavaFX");
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
-    public static void main(String[] args) {
-        //launch(args);
-            try (Connection conn = Database.getConnection();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery("SELECT MaSP, TenSP, GiaBan FROM SanPham")) {
-
-            while (rs.next()) {
-                System.out.println(rs.getInt("MaSP") + " - "
-                        + rs.getString("TenSP") + " - "
-                        + rs.getLong("GiaBan"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.println("Gia von SP so 1: "
+                + dl.getDsSanPham().get(0).tinhGiaVon());                   // 7620
     }
 }
