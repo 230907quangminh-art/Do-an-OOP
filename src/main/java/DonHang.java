@@ -1,52 +1,53 @@
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
-
+ 
 public class DonHang {
     private int maDon;
     private LocalDateTime ngayGio;
-    private int maNV;
+    private NhanVien nhanVien;
     private TrangThaiDon trangThai;
     private PhuongThucTT phuongThucTT;
-    private Integer maBen; // có thể null
+    private BenThuBa benThuBa;     // null = ban tai quan
     private long phuThuBaoBi;
-    private List<ChiTietDon> chiTiet; // nạp thêm sau
-
-    public DonHang(int maDon, LocalDateTime ngayGio, int maNV,
+    private List<ChiTietDon> chiTiet = new ArrayList<>();
+ 
+    public DonHang(int maDon, LocalDateTime ngayGio, NhanVien nhanVien,
                    TrangThaiDon trangThai, PhuongThucTT phuongThucTT,
-                   Integer maBen, long phuThuBaoBi) {
+                   BenThuBa benThuBa, long phuThuBaoBi) {
         this.maDon = maDon;
         this.ngayGio = ngayGio;
-        this.maNV = maNV;
+        this.nhanVien = nhanVien;
         this.trangThai = trangThai;
         this.phuongThucTT = phuongThucTT;
-        this.maBen = maBen;
+        this.benThuBa = benThuBa;
         this.phuThuBaoBi = phuThuBaoBi;
     }
-
+ 
+    public void themChiTiet(ChiTietDon ct) {
+        chiTiet.add(ct);
+    }
+ 
+    // tong tien = tong thanh tien + phu thu bao bi
     public long tinhTongTien() {
-        long tong = phuThuBaoBi;
-        if (chiTiet != null) {
-            for (ChiTietDon ct : chiTiet) {
-                tong += ct.thanhTien();
-            }
-        }
-        return tong;
+        return phuThuBaoBi + chiTiet.stream().mapToLong(ChiTietDon::thanhTien).sum();
     }
-
+ 
     public int tongSoSanPham() {
-        int tong = 0;
-        if (chiTiet != null) {
-            for (ChiTietDon ct : chiTiet) {
-                tong += ct.getSoLuong();
-            }
-        }
-        return tong;
+        return chiTiet.stream().mapToInt(ChiTietDon::getSoLuong).sum();
     }
-
-    public long tinhChietKhau(BenThuBa ben) {
-        if (maBen == null) return 0;
-        return (long)(tinhTongTien() * ben.getTyLeChietKhau());
+ 
+    public long tinhChietKhau() {
+        if (benThuBa == null) return 0;
+        return Math.round(tinhTongTien() * benThuBa.getTyLeChietKhau());
     }
-
-    // getter...
+ 
+    public int getMaDon() { return maDon; }
+    public LocalDateTime getNgayGio() { return ngayGio; }
+    public NhanVien getNhanVien() { return nhanVien; }
+    public TrangThaiDon getTrangThai() { return trangThai; }
+    public PhuongThucTT getPhuongThucTT() { return phuongThucTT; }
+    public BenThuBa getBenThuBa() { return benThuBa; }
+    public long getPhuThuBaoBi() { return phuThuBaoBi; }
+    public List<ChiTietDon> getChiTiet() { return chiTiet; }
 }
