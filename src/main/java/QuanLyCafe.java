@@ -147,3 +147,38 @@ public class QuanLyCafe {
 
     // ----------------------- HET PHAN CUA NAM -----------------------
 }
+    // =====================================================================
+    // =====================================================================
+    //  PHAN CUA MINH
+    //  Don hang va doanh thu
+    //  Cac cau: 3, 4, 5, 6, 7, 11, 14, 17, 19, 30
+    //  (Chi sua trong khung nay. Khong sua phan cua nguoi khac.)
+    // =====================================================================
+    // =====================================================================
+
+
+    public record DoanhThuNgay(LocalDate ngay, long doanhThu) {}    // cau 17
+
+    // Cau 3: Don hoan thanh trong 1 thang cu the
+    public List<DonHang> locDonHoanThanh(YearMonth thang) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && YearMonth.from(d.getNgayGio()).equals(thang))
+                .toList();
+    }
+
+    // Cau 4: Xem chi tiet 1 don. Dung d.getChiTiet() (moi dong co thanhTien()) va d.tinhTongTien()
+    public DonHang xemChiTietDon(int maDon) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getMaDon() == maDon)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Cau 5: Tong tien tung don (ma don -> tong tien)
+    public Map<Integer, Long> tongTienTungDon() {
+        Map<Integer, Long> kq = new LinkedHashMap<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            kq.put(d.getMaDon(), d.tinhTongTien());
+        }
+        return kq;
+    }
