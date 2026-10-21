@@ -260,18 +260,4 @@ public class QuanLyCafe {
     }
 
     // ----------------------- HET PHAN CUA MINH -----------------------
-    // =====================================================================
-    // =====================================================================
-    //  PHAN CUA HUNG
-    //  Nhan vien, thanh toan, ben thu 3, thong ke ban hang
-    //  Cac cau: 8, 9, 10, 15, 16, 21, 22, 23, 25, 29
-    //  (Chi sua trong khung nay. Khong sua phan cua nguoi khac.)
-    // =====================================================================
-    // =====================================================================
-    public record CanhBaoHet(SanPham sanPham, NguyenLieu nguyenLieu, String tinhTrang) {}   // cau 2
-    public record GiaVonSP(SanPham sanPham, long giaVon, long loiNhuan) {}                  // cau 13, 24
-    public record TieuHaoNL(NguyenLieu nguyenLieu, double tieuHaoTrungBinhNgay) {}
-
-
-
 
