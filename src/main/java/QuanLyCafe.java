@@ -94,7 +94,7 @@ public class QuanLyCafe {
     // Cau 20: San pham co luong duong cu the (gram)
     public List<SanPham> sanPhamTheoDuong(int luongDuong) {
         return dl.getDsSanPham().stream()
-                .filter(sp -> sp.getLuongDuong() == luongDuong)
+                .filter(sp -> sp.getLuongDuong() > luongDuong)
                 .toList();
     }
 
@@ -146,4 +146,285 @@ public class QuanLyCafe {
     }
 
     // ----------------------- HET PHAN CUA NAM -----------------------
+
+    // =====================================================================
+    // =====================================================================
+    //  PHAN CUA MINH
+    //  Don hang va doanh thu
+    //  Cac cau: 3, 4, 5, 6, 7, 11, 14, 17, 19, 30
+    //  (Chi sua trong khung nay. Khong sua phan cua nguoi khac.)
+    // =====================================================================
+    // =====================================================================
+
+
+    public record DoanhThuNgay(LocalDate ngay, long doanhThu) {}    // cau 17
+
+    // Cau 3: Don hoan thanh trong 1 thang cu the
+    public List<DonHang> locDonHoanThanh(YearMonth thang) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && YearMonth.from(d.getNgayGio()).equals(thang))
+                .toList();
+    }
+
+    // Cau 4: Xem chi tiet 1 don. Dung d.getChiTiet() (moi dong co thanhTien()) va d.tinhTongTien()
+    public DonHang xemChiTietDon(int maDon) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getMaDon() == maDon)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Cau 5: Tong tien cua 1 don
+    public DonHang tongTienDon(int maDon) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getMaDon() == maDon)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Cau 6: Doanh thu don hoan thanh theo tung ngay (ngay -> doanh thu), sap theo ngay tang dan
+    public Map<LocalDate, Long> doanhThuTheoNgay() {
+        return dl.getDsDonHang().stream()
+                .filter(QuanLyCafe::hoanThanh)
+                .collect(Collectors.groupingBy(
+                        d -> d.getNgayGio().toLocalDate(),
+                        TreeMap::new,
+                        Collectors.summingLong(DonHang::tinhTongTien)));
+    }
+    public List<DonHang> donTheoNgay(LocalDate ngay) {
+        return dl.getDsDonHang().stream()
+                .filter(d ->
+                        hoanThanh(d)
+                                && d.getNgayGio().toLocalDate().equals(ngay))
+                .toList();
+    }
+
+    // Cau 7: Doanh thu theo thang (thang -> doanh thu), sap theo thang tang dan
+    public Map<YearMonth, Long> doanhThuTheoThang() {
+        return dl.getDsDonHang().stream()
+                .filter(QuanLyCafe::hoanThanh)
+                .collect(Collectors.groupingBy(
+                        d -> YearMonth.from(d.getNgayGio()),
+                        TreeMap::new,
+                        Collectors.summingLong(DonHang::tinhTongTien)));
+    }
+
+    // Cau 11a: Don co gia tri lon nhat (tra list vi co the nhieu don bang nhau)
+    public List<DonHang> donLonNhat() {
+        long max = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).max().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() == max)
+                .toList();
+    }
+
+    // Cau 11b: Don co gia tri tren trung binh
+    public List<DonHang> donTrenTrungBinh() {
+        double tb = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).average().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() > tb)
+                .toList();
+    }
+
+    // Cau 11c: Don co gia tri nho nhat
+    public List<DonHang> donNhoNhat() {
+        long min = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).min().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() == min)
+                .toList();
+    }
+
+    // Cau 14: Hoa don co so san pham tren n
+    public List<DonHang> donCoNhieuHonNSanPham(int n) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.tongSoSanPham() > n)
+                .toList();
+    }
+
+    // Cau 17: Ngay co doanh thu cao nhat
+    public DoanhThuNgay ngayDoanhThuCaoNhat() {
+        return doanhThuTheoNgay().entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> new DoanhThuNgay(e.getKey(), e.getValue()))
+                .orElse(null);
+    }
+
+    // Cau 19: Hoa don co gia tri tren 1 so tien
+    public List<DonHang> donTrenGiaTri(long soTien) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.tinhTongTien() > soTien)
+                .toList();
+    }
+
+    // Cau 30: Cac don da huy trong ngay
+    public List<DonHang> donHuyTrongNgay(LocalDate ngay) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getTrangThai() == TrangThaiDon.DA_HUY
+                        && d.getNgayGio().toLocalDate().equals(ngay))
+                .toList();
+    }
+
+    // ----------------------- HET PHAN CUA MINH -----------------------
+
+    // =====================================================================
+    // =====================================================================
+    //  PHAN CUA HUNG
+    //  Nhan vien, thanh toan, ben thu 3, thong ke ban hang
+    //  Cac cau: 8, 9, 10, 15, 16, 21, 22, 23, 25, 29
+    //  (Chi sua trong khung nay. Khong sua phan cua nguoi khac.)
+    // =====================================================================
+    // =====================================================================
+
+    public record SanPhamBan(SanPham sanPham, int soLuong) {}                                  // cau 8
+    public record ThongKeNhanVien(NhanVien nhanVien, int soDon, long doanhThu) {}              // cau 10
+    public record ThongKeThanhToan(PhuongThucTT phuongThuc, int soDon, long tongTien) {}       // cau 15
+    public record DoanhThuNVNgay(NhanVien nhanVien, LocalDate ngay, long doanhThu) {}          // cau 16
+    public record ChietKhauBen(BenThuBa benThuBa, long tongChietKhau) {}                       // cau 22
+    public record SoDonBen(BenThuBa benThuBa, long soDon) {}                                   // cau 25
+    public record KhungGio(int gio, int soSanPham) {}                                          // cau 29
+
+    // Cau 8: Top 5 san pham ban nhieu nhat trong thang (don hoan thanh)
+    public List<SanPhamBan> top5SanPham(YearMonth thang) {
+        Map<SanPham, Integer> dem = new HashMap<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            if (!hoanThanh(d) || !YearMonth.from(d.getNgayGio()).equals(thang)) continue;
+            for (ChiTietDon ct : d.getChiTiet()) {
+                dem.merge(ct.getSanPham(), ct.getSoLuong(), Integer::sum);
+            }
+        }
+        return dem.entrySet().stream()
+                .map(e -> new SanPhamBan(e.getKey(), e.getValue()))
+                .sorted(Comparator.comparingInt(SanPhamBan::soLuong).reversed())
+                .limit(5)
+                .toList();
+    }
+
+    // Cau 9: San pham chua ban duoc trong ngay (khong co don hoan thanh nao trong ngay do)
+    public List<SanPham> sanPhamChuaBan(LocalDate ngay) {
+        Set<SanPham> daBan = new HashSet<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            if (hoanThanh(d) && d.getNgayGio().toLocalDate().equals(ngay)) {
+                for (ChiTietDon ct : d.getChiTiet()) {
+                    daBan.add(ct.getSanPham());
+                }
+            }
+        }
+        return dl.getDsSanPham().stream()
+                .filter(sp -> !daBan.contains(sp))
+                .toList();
+    }
+
+    // Cau 10: So don va doanh thu tung nhan vien (don hoan thanh)
+    public List<ThongKeNhanVien> thongKeNhanVien() {
+        return dl.getDsNhanVien().stream()
+                .map(nv -> {
+                    List<DonHang> don = dl.getDsDonHang().stream()
+                            .filter(d -> hoanThanh(d) && d.getNhanVien() == nv)
+                            .toList();
+                    long doanhThu = don.stream().mapToLong(DonHang::tinhTongTien).sum();
+                    return new ThongKeNhanVien(nv, don.size(), doanhThu);
+                })
+                .toList();
+    }
+
+    // Cau 15: Thong ke hoa don tien mat / chuyen khoan (don hoan thanh)
+    public List<DonHang> donTheoThanhToan(
+            PhuongThucTT pt) {
+
+        return dl.getDsDonHang().stream()
+                .filter(d ->
+                        hoanThanh(d)
+                                && d.getPhuongThucTT() == pt)
+                .toList();
+    }
+    // Cau 16: Doanh thu cua tung nhan vien theo tung ngay
+    public List<DoanhThuNVNgay> doanhThuNhanVienTheoNgay(
+            LocalDate ngay) {
+        List<DoanhThuNVNgay> kq = new ArrayList<>();
+        for (NhanVien nv : dl.getDsNhanVien()) {
+            long doanhThu =
+                    dl.getDsDonHang().stream()
+                            .filter(d ->
+                                    hoanThanh(d)
+                                            && d.getNhanVien() == nv
+                                            && d.getNgayGio()
+                                            .toLocalDate()
+                                            .equals(ngay))
+                            .mapToLong(DonHang::tinhTongTien)
+                            .sum();
+
+            kq.add(
+                    new DoanhThuNVNgay(
+                            nv,
+                            ngay,
+                            doanhThu
+                    )
+            );
+        }
+
+        return kq;
+    }
+
+    // Cau 21: Don dat qua ben thu 3 co tinh phu phi bao bi
+    public List<DonHang> donBenThuBaCoPhuThu() {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getBenThuBa() != null && d.getPhuThuBaoBi() > 0)
+                .toList();
+    }
+
+    // Cau 22: Tong chiet khau cho tung ben thu 3 (cong cac dong lai neu can tong chung)
+    public List<ChietKhauBen> tongChietKhau() {
+        return dl.getDsBenThuBa().stream()
+                .map(b -> new ChietKhauBen(b, dl.getDsDonHang().stream()
+                        .filter(d -> hoanThanh(d) && d.getBenThuBa() == b)
+                        .mapToLong(DonHang::tinhChietKhau)
+                        .sum()))
+                .toList();
+    }
+
+    // Cau 23: So ly nhua da su dung (nguyen lieu ten "Ly nhua", don hoan thanh)
+    public long thongKeLyNhua() {
+        double tong = 0;
+        for (DonHang d : dl.getDsDonHang()) {
+            if (!hoanThanh(d)) continue;
+            for (ChiTietDon ct : d.getChiTiet()) {
+                for (CongThuc c : ct.getSanPham().getCongThuc()) {
+                    if (c.getNguyenLieu().getTenNL().equals(TEN_LY_NHUA)) {
+                        tong += ct.getSoLuong() * c.getDinhLuong();
+                    }
+                }
+            }
+        }
+        return Math.round(tong);
+    }
+
+    // Cau 25: Ben thu 3 co nhieu don nhat (don hoan thanh)
+    public SoDonBen benNhieuDonNhat() {
+        Map<BenThuBa, Long> dem = dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.getBenThuBa() != null)
+                .collect(Collectors.groupingBy(DonHang::getBenThuBa, Collectors.counting()));
+        return dem.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> new SoDonBen(e.getKey(), e.getValue()))
+                .orElse(null);
+    }
+
+    // Cau 29: Khung gio (0-23) ban duoc nhieu san pham nhat (don hoan thanh)
+    public KhungGio khungGioBanChayNhat() {
+        Map<Integer, Integer> theoGio = new TreeMap<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            if (!hoanThanh(d)) continue;
+            for (ChiTietDon ct : d.getChiTiet()) {
+                theoGio.merge(d.getNgayGio().getHour(), ct.getSoLuong(), Integer::sum);
+            }
+        }
+        return theoGio.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> new KhungGio(e.getKey(), e.getValue()))
+                .orElse(null);
+    }
+
+    // ----------------------- HET PHAN CUA HUNG -----------------------
 }
