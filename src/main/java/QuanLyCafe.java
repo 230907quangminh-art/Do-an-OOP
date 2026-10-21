@@ -182,3 +182,82 @@ public class QuanLyCafe {
         }
         return kq;
     }
+    // Cau 6: Doanh thu don hoan thanh theo tung ngay (ngay -> doanh thu), sap theo ngay tang dan
+    public Map<LocalDate, Long> doanhThuTheoNgay() {
+        return dl.getDsDonHang().stream()
+                .filter(QuanLyCafe::hoanThanh)
+                .collect(Collectors.groupingBy(
+                        d -> d.getNgayGio().toLocalDate(),
+                        TreeMap::new,
+                        Collectors.summingLong(DonHang::tinhTongTien)));
+    }
+
+    // Cau 7: Doanh thu theo thang (thang -> doanh thu), sap theo thang tang dan
+    public Map<YearMonth, Long> doanhThuTheoThang() {
+        return dl.getDsDonHang().stream()
+                .filter(QuanLyCafe::hoanThanh)
+                .collect(Collectors.groupingBy(
+                        d -> YearMonth.from(d.getNgayGio()),
+                        TreeMap::new,
+                        Collectors.summingLong(DonHang::tinhTongTien)));
+    }
+
+    // Cau 11a: Don co gia tri lon nhat (tra list vi co the nhieu don bang nhau)
+    public List<DonHang> donLonNhat() {
+        long max = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).max().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() == max)
+                .toList();
+    }
+
+    // Cau 11b: Don co gia tri tren trung binh
+    public List<DonHang> donTrenTrungBinh() {
+        double tb = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).average().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() > tb)
+                .toList();
+    }
+
+    // Cau 11c: Don co gia tri nho nhat
+    public List<DonHang> donNhoNhat() {
+        long min = dl.getDsDonHang().stream().filter(QuanLyCafe::hoanThanh)
+                .mapToLong(DonHang::tinhTongTien).min().orElse(0);
+        return dl.getDsDonHang().stream()
+                .filter(d -> hoanThanh(d) && d.tinhTongTien() == min)
+                .toList();
+    }
+
+    // Cau 14: Hoa don co so san pham tren n
+    public List<DonHang> donCoNhieuHonNSanPham(int n) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.tongSoSanPham() > n)
+                .toList();
+    }
+
+    // Cau 17: Ngay co doanh thu cao nhat
+    public DoanhThuNgay ngayDoanhThuCaoNhat() {
+        return doanhThuTheoNgay().entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(e -> new DoanhThuNgay(e.getKey(), e.getValue()))
+                .orElse(null);
+    }
+
+    // Cau 19: Hoa don co gia tri tren 1 so tien
+    public List<DonHang> donTrenGiaTri(long soTien) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.tinhTongTien() > soTien)
+                .toList();
+    }
+
+    // Cau 30: Cac don da huy trong ngay
+    public List<DonHang> donHuyTrongNgay(LocalDate ngay) {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getTrangThai() == TrangThaiDon.DA_HUY
+                        && d.getNgayGio().toLocalDate().equals(ngay))
+                .toList();
+    }
+
+    // ----------------------- HET PHAN CUA MINH -----------------------
+
