@@ -277,3 +277,37 @@ public class QuanLyCafe {
     public record SoDonBen(BenThuBa benThuBa, long soDon) {}                                   // cau 25
     public record KhungGio(int gio, int soSanPham) {}                                          // cau 29
 
+
+
+    // Cau 8: Top 5 san pham ban nhieu nhat trong thang (don hoan thanh)
+    public List<SanPhamBan> top5SanPham(YearMonth thang) {
+        Map<SanPham, Integer> dem = new HashMap<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            if (!hoanThanh(d) || !YearMonth.from(d.getNgayGio()).equals(thang)) continue;
+            for (ChiTietDon ct : d.getChiTiet()) {
+                dem.merge(ct.getSanPham(), ct.getSoLuong(), Integer::sum);
+            }
+        }
+        return dem.entrySet().stream()
+                .map(e -> new SanPhamBan(e.getKey(), e.getValue()))
+                .sorted(Comparator.comparingInt(SanPhamBan::soLuong).reversed())
+                .limit(5)
+                .toList();
+    }
+
+    // Cau 9: San pham chua ban duoc trong ngay (khong co don hoan thanh nao trong ngay do)
+    public List<SanPham> sanPhamChuaBan(LocalDate ngay) {
+        Set<SanPham> daBan = new HashSet<>();
+        for (DonHang d : dl.getDsDonHang()) {
+            if (hoanThanh(d) && d.getNgayGio().toLocalDate().equals(ngay)) {
+                for (ChiTietDon ct : d.getChiTiet()) {
+                    daBan.add(ct.getSanPham());
+                }
+            }
+        }
+        return dl.getDsSanPham().stream()
+                .filter(sp -> !daBan.contains(sp))
+                .toList();
+    }
+
+
