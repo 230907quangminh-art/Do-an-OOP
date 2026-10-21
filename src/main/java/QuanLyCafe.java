@@ -309,5 +309,51 @@ public class QuanLyCafe {
                 .filter(sp -> !daBan.contains(sp))
                 .toList();
     }
+    // Cau 10: So don va doanh thu tung nhan vien (don hoan thanh)
+    public List<ThongKeNhanVien> thongKeNhanVien() {
+        return dl.getDsNhanVien().stream()
+                .map(nv -> {
+                    List<DonHang> don = dl.getDsDonHang().stream()
+                            .filter(d -> hoanThanh(d) && d.getNhanVien() == nv)
+                            .toList();
+                    long doanhThu = don.stream().mapToLong(DonHang::tinhTongTien).sum();
+                    return new ThongKeNhanVien(nv, don.size(), doanhThu);
+                })
+                .toList();
+    }
 
+    // Cau 15: Thong ke hoa don tien mat / chuyen khoan (don hoan thanh)
+    public List<ThongKeThanhToan> thongKeThanhToan() {
+        List<ThongKeThanhToan> kq = new ArrayList<>();
+        for (PhuongThucTT pt : PhuongThucTT.values()) {
+            List<DonHang> don = dl.getDsDonHang().stream()
+                    .filter(d -> hoanThanh(d) && d.getPhuongThucTT() == pt)
+                    .toList();
+            kq.add(new ThongKeThanhToan(pt, don.size(),
+                    don.stream().mapToLong(DonHang::tinhTongTien).sum()));
+        }
+        return kq;
+    }
+
+    // Cau 16: Doanh thu cua tung nhan vien theo tung ngay
+    public List<DoanhThuNVNgay> doanhThuNhanVienTheoNgay() {
+        List<DoanhThuNVNgay> kq = new ArrayList<>();
+        for (NhanVien nv : dl.getDsNhanVien()) {
+            Map<LocalDate, Long> theoNgay = dl.getDsDonHang().stream()
+                    .filter(d -> hoanThanh(d) && d.getNhanVien() == nv)
+                    .collect(Collectors.groupingBy(
+                            d -> d.getNgayGio().toLocalDate(),
+                            TreeMap::new,
+                            Collectors.summingLong(DonHang::tinhTongTien)));
+            theoNgay.forEach((ngay, tien) -> kq.add(new DoanhThuNVNgay(nv, ngay, tien)));
+        }
+        return kq;
+    }
+
+    // Cau 21: Don dat qua ben thu 3 co tinh phu phi bao bi
+    public List<DonHang> donBenThuBaCoPhuThu() {
+        return dl.getDsDonHang().stream()
+                .filter(d -> d.getBenThuBa() != null && d.getPhuThuBaoBi() > 0)
+                .toList();
+    }
 
