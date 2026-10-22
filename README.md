@@ -25,11 +25,8 @@ Hệ thống được xây dựng nhằm mô phỏng việc quản lý dữ li�
 4. Chờ IntelliJ tải các thư viện Maven. Nếu cần, mở cửa sổ Maven và chọn **Reload All Maven Projects**.
 5. Kiểm tra file dữ liệu `src/main/resources/quan_cafe.db` vẫn có trong project.
 6. Mở `src/main/java/App.java`.
-7. Nhấn biểu tượng tam giác cạnh phương thức `main()` hoặc chọn **Run 'App.main()'**.
+7. Nhập mvn clean install và mvn exec:java trong terminal.
 8. Khi cửa sổ **Quản lý quán cà phê - 30 câu truy vấn** xuất hiện, chọn câu truy vấn ở danh sách bên trái. Điền hoặc chọn tham số nếu câu hỏi yêu cầu, sau đó nhấn **Chạy** để xem kết quả.
-
-Nếu không thấy nút **Run**, hãy kiểm tra Project SDK đã chọn JDK 21 chưa, tải lại project Maven và bảo đảm thư mục `src/main/java` được IntelliJ nhận diện là thư mục mã nguồn.
-
 ### Chạy thử bằng Maven
 
 Có thể kiểm tra quá trình biên dịch bằng lệnh sau tại thư mục có `pom.xml`:
