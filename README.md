@@ -119,23 +119,13 @@ Dữ liệu được lưu trong SQLite, ở file `src/main/resources/quan_cafe.d
 `TrangThaiDon` và `PhuongThucTT` là enum trong Java, không phải các bảng riêng trong cơ sở dữ liệu. Ly nhựa được biểu diễn qua dữ liệu nguyên liệu/công thức, không phải một bảng độc lập trong phiên bản này.
 
 ### Mối quan hệ chính
-
-- Một danh mục có nhiều sản phẩm.
-- Sản phẩm và nguyên liệu có quan hệ nhiều-nhiều thông qua bảng `CongThuc`.
-- Một đơn hàng có nhiều dòng chi tiết; mỗi dòng chi tiết tham chiếu đến một sản phẩm.
-- Một nhân viên có thể phụ trách nhiều đơn hàng; mỗi đơn hàng gắn với một nhân viên.
-- Một nền tảng bên thứ ba có thể nhận nhiều đơn hàng; một đơn hàng có thể không gắn nền tảng bên thứ ba nếu bán trực tiếp tại quán.
-
-```mermaid
-erDiagram
-    DANHMUC ||--o{ SANPHAM : phan_loai
-    SANPHAM ||--o{ CONGTHUC : co_cong_thuc
-    NGUYENLIEU ||--o{ CONGTHUC : duoc_su_dung
-    NHANVIEN ||--o{ DONHANG : phu_trach
-    BENTHUBA o|--o{ DONHANG : kenh_dat_hang
-    DONHANG ||--o{ CHITIETDON : gom
-    SANPHAM ||--o{ CHITIETDON : duoc_ban
-```
+Một Danh mục có nhiều Sản phẩm; mỗi sản phẩm thuộc một danh mục.
+Một Sản phẩm có nhiều Công thức; mỗi công thức thuộc một sản phẩm.
+Một Nguyên liệu có thể được sử dụng trong nhiều Công thức; mỗi công thức sử dụng một nguyên liệu.
+Một Đơn hàng có nhiều Chi tiết đơn hàng; mỗi chi tiết đơn hàng thuộc một đơn hàng.
+Một Sản phẩm có thể xuất hiện trong nhiều Chi tiết đơn hàng; mỗi chi tiết đơn hàng tham chiếu đến một sản phẩm.
+Một Nhân viên có thể phụ trách nhiều Đơn hàng; mỗi đơn hàng do một nhân viên phụ trách.
+Một Bên thứ ba có thể tiếp nhận nhiều Đơn hàng; mỗi đơn hàng gắn với một bên thứ ba theo sơ đồ.
 
 ### Dữ liệu mẫu
 
@@ -224,3 +214,6 @@ Ngày demo theo dữ liệu mẫu: **23/09/2026**.
 28. **Câu 28:** Tìm nguyên liệu có mức tiêu hao trung bình mỗi ngày cao nhất.
 29. **Câu 29:** Tìm khung giờ bán được nhiều sản phẩm nhất.
 30. **Câu 30:** Lọc các đơn đã hủy trong ngày 23/09/2026.
+## 9. Sơ đồ
+<img width="1037" height="715" alt="image" src="https://github.com/user-attachments/assets/908495ea-771a-4f6d-931d-c295a3f12d09" />
+
