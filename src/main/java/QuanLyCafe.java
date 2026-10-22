@@ -175,12 +175,13 @@ public class QuanLyCafe {
     }
 
     // Cau 5: Tong tien cua 1 don
-    public DonHang tongTienDon(int maDon) {
-        return dl.getDsDonHang().stream()
-                .filter(d -> d.getMaDon() == maDon)
-                .findFirst()
-                .orElse(null);
-    }
+    public Long tongTienDon(int maDon) {
+       return dl.getDsDonHang().stream()
+              .filter(d -> d.getMaDon() == maDon)
+              .findFirst()
+              .map(DonHang::tinhTongTien)
+              .orElse(null);
+}
 
     // Cau 6: Doanh thu don hoan thanh theo tung ngay (ngay -> doanh thu), sap theo ngay tang dan
     public Map<LocalDate, Long> doanhThuTheoNgay() {
