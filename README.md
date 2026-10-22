@@ -17,24 +17,8 @@ Hệ thống được xây dựng nhằm mô phỏng việc quản lý dữ li�
 - **SQLite JDBC** – kết nối Java với SQLite.
 - **IntelliJ IDEA** – môi trường phát triển được khuyến nghị.
 
-> **Lưu ý:** Phiên bản trong ZIP này là dự án JavaFX + SQLite. Dự án không dùng MySQL, SQL Server hoặc C# và không cần cài máy chủ cơ sở dữ liệu riêng để chạy dữ liệu mẫu.
 
 ## 3. Cách mở và chạy trong IntelliJ IDEA
-
-> **Lỗi cần sửa trước khi chạy bản ZIP hiện tại:** Trong `App.java`, phần Câu 5 đang gán kết quả `ql.tongTienDon(maDon)` vào biến kiểu `DonHang`, nhưng phương thức `tongTienDon()` trong `QuanLyCafe.java` trả về `Long`. Hai kiểu dữ liệu này không tương thích nên project sẽ báo lỗi biên dịch. Vì Câu 5 cần lấy thông tin đơn và các dòng chi tiết, hãy đổi dòng:
->
-> ```java
-> DonHang don = ql.tongTienDon(maDon);
-> ```
->
-> thành:
->
-> ```java
-> DonHang don = ql.xemChiTietDon(maDon);
-> ```
->
-> Sau khi sửa dòng trên, tiếp tục các bước mở và chạy project bên dưới.
-
 1. Giải nén `Do-an-OOP-main.zip` vào một thư mục trên máy.
 2. Mở IntelliJ IDEA, chọn **File → Open**, rồi chọn file `pom.xml` trong thư mục `Do-an-OOP-main` để mở project Maven.
 3. Cài và chọn **JDK 21** tại **File → Project Structure → Project → SDK**. Cần JDK 21, không chỉ JRE.
@@ -155,7 +139,7 @@ erDiagram
 
 ### Dữ liệu mẫu
 
-Cơ sở dữ liệu đi kèm ZIP hiện có 6 danh mục, 20 sản phẩm, 22 nguyên liệu, 5 nhân viên, 3 nền tảng bên thứ ba và 636 đơn hàng. Dữ liệu đơn hàng có thời gian từ ngày 01/07/2026 đến ngày 30/09/2026.
+Cơ sở dữ liệu có 6 danh mục, 20 sản phẩm, 22 nguyên liệu, 5 nhân viên, 3 nền tảng bên thứ ba và 636 đơn hàng. Dữ liệu đơn hàng có thời gian từ ngày 01/07/2026 đến ngày 30/09/2026.
 
 Một số sản phẩm mẫu gồm cà phê sữa đá, bạc xỉu, Americano, trà đào cam sả, trà sữa và bánh; các nền tảng bên thứ ba gồm GrabFood, ShopeeFood và beFood.
 
@@ -240,5 +224,3 @@ Ngày demo theo dữ liệu mẫu: **23/09/2026**.
 28. **Câu 28:** Tìm nguyên liệu có mức tiêu hao trung bình mỗi ngày cao nhất.
 29. **Câu 29:** Tìm khung giờ bán được nhiều sản phẩm nhất.
 30. **Câu 30:** Lọc các đơn đã hủy trong ngày 23/09/2026.
-
-> Các câu có tham số cho phép chỉnh ngày, tháng, mã sản phẩm/nguyên liệu hoặc ngưỡng lọc ngay trên giao diện. Nên kiểm tra tham số trước khi nhấn **Chạy**.
