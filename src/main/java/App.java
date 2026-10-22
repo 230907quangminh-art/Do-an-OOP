@@ -537,7 +537,7 @@ public class App extends Application {
 
             int maDon = layInt(p, K_MA_DON);
 
-            DonHang don = ql.tongTienDon(maDon);
+            DonHang don = ql.xemChiTietDon(maDon);
 
             if (don == null) {
                 return new KetQua(
