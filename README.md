@@ -1,6 +1,6 @@
 # Quản lý quán cà phê – Đồ án OOP cuối kỳ
 
-**Ứng dụng Java 21, quản lý và thống kê dữ liệu quán cà phê bằng SQLite.** Dự án sử dụng Maven để quản lý thư viện và JDBC để đọc dữ liệu từ cơ sở dữ liệu SQLite được đóng gói sẵn trong project.
+**Ứng dụng Java 21 + Java FX, quản lý và thống kê dữ liệu quán cà phê bằng SQLite.** Dự án sử dụng Maven để quản lý thư viện và JDBC để đọc dữ liệu từ cơ sở dữ liệu SQLite được đóng gói sẵn trong project.
 
 ## 1. Phát biểu vấn đề
 
